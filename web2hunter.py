@@ -9,7 +9,6 @@
 
 import domainhunter as DH
 import random
-import pyanagrams
 
 from google.appengine.api import memcache
 
@@ -18,7 +17,7 @@ from google.appengine.api import memcache
 # C = ["Ai", "Aba", "Agi", "Ava", "Awesome", "Cami", "Centi", "Cogi", "Demi", "Diva", "Dyna", "Ea", "Ei", "Fa", "Ge", "Ja", "I", "Ka", "Kay", "Ki", "Kwi", "La", "Lee", "Mee", "Mi", "Mu", "My", "Oo", "O", "Oyo", "Pixo", "Pla", "Qua", "Qui", "Roo", "Rhy", "Ska", "Sky", "Ski", "Ta", "Tri", "Twi", "Tru", "Vi", "Voo", "Wiki", "Ya", "Yaki", "Yo", "Za", "Zoo"]
 # D = ["ba", "ble", "boo", "box", "cero", "deo", "del", "do", "doo", "gen", "jo", "lane", "lia", "lith", "loo", "lium", "mba", "mbee", "mbo", "mbu", "mia", "mm", "nder", "ndo", "ndu", "noodle", "nix", "nte", "nti", "nu", "nyx", "pe", "re", "ta", "tri", "tz", "va", "vee", "veo", "vu", "xo", "yo", "zz", "zzy", "zio", "zu"]
 
-def genName(sessionkey, seedfood):
+def genName(sessionkey):
 	output = ""
 
 	# random.shuffle(A)
@@ -31,22 +30,18 @@ def genName(sessionkey, seedfood):
 	# else:
 	# 	awesomename = C[0] + D[0]
 	
-	#random.shuffle(DH.tlds)
-	if memcache.get(sessionkey) is None:
-		food = pyanagrams.getanagrams(seedfood)
-		memcache.set(sessionkey, food, 18000)
-		output = 'loading...'
-	else:
-		anagramlist = memcache.get(sessionkey)
-		random.shuffle(anagramlist)
-		
-		awesomename = anagramlist[0]
 	
-		awesomename = awesomename.replace(" ", "")
+	anagramlist = memcache.get(str(sessionkey))
+	numlen = len(anagramlist)
+	rndnum = random.randrange(0, numlen)
+	awesomename = anagramlist[rndnum]
+	
+	awesomename = awesomename.replace(" ", "")
 
-		tld = DH.tlds[0]
-		
-		if ( DH.domainSearch(awesomename + tld) ):
-			output = awesomename + tld
+	random.shuffle(DH.tlds)
+	tld = DH.tlds[0]
+	
+	if ( DH.domainSearch(awesomename + tld) ):
+		output = awesomename + tld
 			
 	return output

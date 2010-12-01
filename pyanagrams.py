@@ -62,7 +62,7 @@ return value will be a list,
 how to call: getanagram(str(word))
 """
     urlprefix = 'anagram.cgi?anagram='
-    urlsuffix = '&t=1000&a=n'
+    urlsuffix = '&t=100&a=n'
     processurl = webservice+urlprefix+word+urlsuffix
     stream = urllib.urlopen(processurl).read()
     soup = BeautifulSoup(stream)

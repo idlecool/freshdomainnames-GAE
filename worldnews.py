@@ -11,6 +11,7 @@ stream = ""
 
 
 def _worldnews():
+    # webservice = 'http://www.thehindu.com/sci-tech/technology/?service=rss'
     webservice = 'http://www.thehindu.com/news/international/?service=rss'
     global stream
     if stream == "":
@@ -46,7 +47,7 @@ def _getproperwords():
         stringaslist.remove("")
     properwords = []
     for word in stringaslist:
-        if len(word) > 5:
+        if len(word) > 4 and len(word) < 10:
             properwords.append(word)
     return properwords, feed
 
@@ -58,9 +59,9 @@ def getwords():
     feedlen = len(properwords)
     words = []
     word1 = properwords[random.randrange(0,feedlen)]
-    properwords.remove(word1)
-    word2 = properwords[random.randrange(0,feedlen-1)]
-    words.extend([word1, word2])
+    #properwords.remove(word1)
+    #word2 = properwords[random.randrange(0,feedlen-1)]
+    words.extend([word1,])
     return words, feed
 
 

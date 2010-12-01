@@ -3,6 +3,7 @@
 '''
 
 import os
+import random
 
 import wsgiref.handlers
 from google.appengine.ext import webapp
@@ -24,12 +25,12 @@ class MainHandler(webapp.RequestHandler):
 
 					# return a possible domain name
 				        sessionkey = self.request.get('sessionkey')
-					seedfood = self.request.get('seedfood')
+					#seedfood = self.request.get('seedfood')
 					
-					possiblename = WH.genName(sessionkey, seedfood)
+					possiblename = WH.genName(sessionkey)
 
 					while (possiblename == ""):
-						possiblename = WH.genName(sessionkey, seedfood)
+						possiblename = WH.genName(sessionkey)
 			
 					# lets sanitize the possible name
 					# for sometime we get the response header for some reason -
@@ -47,32 +48,34 @@ class MainHandler(webapp.RequestHandler):
 			
 			if custom == 'search':				
 				name = self.request.get('name')
-				sessionkey, seedfood = customfood(name)
+				sessionkey, np = customfood(self,name)
 				words = name
 				newstitle = None
 				newslink = None
 				newsdesc = None
 			else:
 				# prepare food
-				# try:
-					sessionkey, seedfood, words, news = preparefood()
+				try:
+					sessionkey, words, news, np = preparefood(self)
 					newstitle = news[0]
 					newslink = news[1]
 					newsdesc = news[2]
 					words = " ".join(words)
-				# except Exception:
-				#	sessionkey = None
-				#	words = None
-				#	newstitle = None
-				#	newslink = None
-				#	newsdesc = None
+				except Exception:
+					sessionkey = None
+					words = None
+					newstitle = None
+					newslink = None
+					newsdesc = None
+					np = None
+			if np:
+				self.redirect("/?rnd=", random.random())
 			template_values = {
 				'sessionkey': sessionkey,
 				'words': words,
 				'newstitle': newstitle,
 				'newslink': newslink,
 				'newsdesc': newsdesc,
-				'seedfood': seedfood,
 				}
 			# render the template
 			outstr = template.render (

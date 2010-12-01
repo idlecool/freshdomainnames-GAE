@@ -35,7 +35,7 @@ function fetchmefood() {
 				     }
 					 
 					 
-					 $.get ("/", { getname: "true", sessionkey: "{{sessionkey}}", seedfood: "{{seedfood}}" },
+					 $.get ("/", { getname: "true", sessionkey: "{{sessionkey}}"},
 						function(data) {
 							$(".domainShouter").html ( 
 							    $("<div class='domainPop'>" + data + 
@@ -58,7 +58,7 @@ function fetchmefood() {
 $(document).ready(function(){
     fetchmefood();
     if ('{{sessionkey}}' != 'None') {
-	setInterval ('fetchmefood()',5000);
+	setInterval ('fetchmefood()',1000);
     }
 });
     </script>
