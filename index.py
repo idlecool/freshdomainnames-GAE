@@ -69,7 +69,7 @@ class MainHandler(webapp.RequestHandler):
 					newsdesc = None
 					np = None
 			if np:
-				self.redirect("/?rnd=", random.random())
+				self.redirect("/?rnd=", str(random.random()))
 			template_values = {
 				'sessionkey': sessionkey,
 				'words': words,

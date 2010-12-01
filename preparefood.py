@@ -14,7 +14,6 @@ def preparefood(self):
     food = pyanagrams.getanagrams(seedfood)
     np = False
     if (food == []):
-        self.redirect("/?rnd="+random.random())
         np = True
     else:
         memcache.set(str(randkey), food, 18000)
@@ -27,7 +26,6 @@ def customfood(self, word):
     food = pyanagrams.getanagrams(seedfood)
     np = False
     if (food == []):
-        self.redirect("/?rnd="+random.random())
         np = True
     else:
         memcache.set(str(randkey), food, 18000)
