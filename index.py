@@ -24,11 +24,12 @@ class MainHandler(webapp.RequestHandler):
 
 					# return a possible domain name
 				        sessionkey = self.request.get('sessionkey')
+					seedfood = self.request.get('seedfood')
 					
-					possiblename = WH.genName(sessionkey)
+					possiblename = WH.genName(sessionkey, seedfood)
 
 					while (possiblename == ""):
-						possiblename = WH.genName(sessionkey)
+						possiblename = WH.genName(sessionkey, seedfood)
 			
 					# lets sanitize the possible name
 					# for sometime we get the response header for some reason -
@@ -46,7 +47,7 @@ class MainHandler(webapp.RequestHandler):
 			
 			if custom == 'search':				
 				name = self.request.get('name')
-				sessionkey = customfood(name)
+				sessionkey, seedfood = customfood(name)
 				words = name
 				newstitle = None
 				newslink = None
@@ -54,7 +55,7 @@ class MainHandler(webapp.RequestHandler):
 			else:
 				# prepare food
 				# try:
-					sessionkey, words, news = preparefood()
+					sessionkey, seedfood, words, news = preparefood()
 					newstitle = news[0]
 					newslink = news[1]
 					newsdesc = news[2]
@@ -71,6 +72,7 @@ class MainHandler(webapp.RequestHandler):
 				'newstitle': newstitle,
 				'newslink': newslink,
 				'newsdesc': newsdesc,
+				'seedfood': seedfood,
 				}
 			# render the template
 			outstr = template.render (

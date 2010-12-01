@@ -28,20 +28,20 @@ function fetchmefood() {
 					 if (!firstRun) {
 					     $(".domainList").prepend ("<span class='dList'><a target='_new' href =" + 
 								       "'http://google.com/a/cpanel/domain/selectDomain?domain=" 
-								       + foo + "'>" + foo + "</a></span> " 
+								       + foo + "'>" + foo + "</a></span> "
 								      );		
 				     } else {
 					 firstRun = false;
 				     }
 					 
 					 
-					 $.get ("/", { getname: "true", sessionkey: "{{sessionkey}}" },
+					 $.get ("/", { getname: "true", sessionkey: "{{sessionkey}}", seedfood: "{{seedfood}}" },
 						function(data) {
-						    $(".domainShouter").html ( 
-							$("<div class='domainPop'>" + data + 
-							  "</div> ").animate(
-							      {fontSize : '30px'},500,"swing")
-						    );							
+							$(".domainShouter").html ( 
+							    $("<div class='domainPop'>" + data + 
+							      "</div> ").animate(
+								  {fontSize : '30px'},500,"swing")
+							);				
 						}
 					       );
 				     }
