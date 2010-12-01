@@ -30,18 +30,23 @@ def genName(sessionkey):
 	# else:
 	# 	awesomename = C[0] + D[0]
 	
-	
-	anagramlist = memcache.get(str(sessionkey))
-	numlen = len(anagramlist)
-	rndnum = random.randrange(0, numlen)
-	awesomename = anagramlist[rndnum]
-	
-	awesomename = awesomename.replace(" ", "")
-
-	random.shuffle(DH.tlds)
-	tld = DH.tlds[0]
-	
-	if ( DH.domainSearch(awesomename + tld) ):
-		output = awesomename + tld
+	while(1):
+		anagramlist = memcache.get(str(sessionkey))
+		anagramchklist = memcache.get(str(sessionkey)+"_chk")
+		numlen = len(anagramlist)
+		rndnum = random.randrange(0, numlen)
+		awesomename = anagramlist[rndnum]
+		
+		awesomename = awesomename.replace(" ", "")
+		
+		random.shuffle(DH.tlds)
+		tld = DH.tlds[0]
+		
+		if ( DH.domainSearch(awesomename + tld) ):
+			output = awesomename + tld
+		if output not in anagramchklist:
+			anagramchklist.append(output)
+			memcache.set(str(sessionkey)+"_chk", anagramchklist, 18000)
+			break
 			
 	return output

@@ -48,7 +48,7 @@ class MainHandler(webapp.RequestHandler):
 			
 			if custom == 'search':				
 				name = self.request.get('name')
-				sessionkey, np = customfood(self,name)
+				sessionkey, np = customfood(name)
 				words = name
 				newstitle = None
 				newslink = None
@@ -56,7 +56,7 @@ class MainHandler(webapp.RequestHandler):
 			else:
 				# prepare food
 				try:
-					sessionkey, words, news, np = preparefood(self)
+					sessionkey, words, news, np = preparefood()
 					newstitle = news[0]
 					newslink = news[1]
 					newsdesc = news[2]

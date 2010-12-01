@@ -7,7 +7,7 @@ import worldnews
 import pyanagrams
 from google.appengine.api import memcache
 
-def preparefood(self):
+def preparefood():
     words, feed = worldnews.getwords()
     randkey = str(random.randrange(111111,999999))
     seedfood = " ".join(words)
@@ -17,9 +17,10 @@ def preparefood(self):
         np = True
     else:
         memcache.set(str(randkey), food, 18000)
-        return randkey, words, feed, np
+        memcache.set(str(randkey)+"_chk", [], 18000)
+    return randkey, words, feed, np
 
-def customfood(self, word):
+def customfood(word):
     randkey = str(random.randrange(111111,999999))
     strlist = re.split(r"[^a-z^A-Z]",word)
     seedfood = "".join(word)
@@ -29,5 +30,6 @@ def customfood(self, word):
         np = True
     else:
         memcache.set(str(randkey), food, 18000)
-        return randkey, np
+        memcache.set(str(randkey)+"_chk", [], 18000)
+    return randkey, np
     
