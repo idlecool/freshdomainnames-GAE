@@ -53,18 +53,18 @@ class MainHandler(webapp.RequestHandler):
 				newsdesc = None
 			else:
 				# prepare food
-				try:
+				# try:
 					sessionkey, words, news = preparefood()
 					newstitle = news[0]
 					newslink = news[1]
 					newsdesc = news[2]
 					words = " ".join(words)
-				except Exception:
-					sessionkey = None
-					words = None
-					newstitle = None
-					newslink = None
-					newsdesc = None
+				# except Exception:
+				#	sessionkey = None
+				#	words = None
+				#	newstitle = None
+				#	newslink = None
+				#	newsdesc = None
 			template_values = {
 				'sessionkey': sessionkey,
 				'words': words,
