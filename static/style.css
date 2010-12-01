@@ -5,22 +5,53 @@
 }
 
 body{
-	background: #fff3b0 top left repeat-x;
+	background: #eee top left repeat-x;
 	text-align:center;
 	font-family:'Monaco','Consolas','Monotype','trebuchet-MS',Verdana, Arial;
 }
 
-body div {
-	width:770px;
+div#wrapper {
+	width:960px;
 	margin:0px auto;
 	text-align: left;
 }
 	
 .header {
-	border-bottom: 10px solid #FFC56A;
+/*	border-bottom: 10px solid #FFC56A;*/
+        text-align: center;
+        margin-bottom: 20px;
 	height:115px;
-	padding:5px;
-	background:url("/static/images/clouds.jpg") right top no-repeat;
+	padding: 15px;
+	background-color: #ddd;
+	float:left;
+/*	background:url("/static/images/clouds.jpg") right top no-repeat;*/
+	width: 550px;
+	-webkit-border-bottom-right-radius: 20px;
+	-webkit-border-bottom-left-radius: 20px;
+	-moz-border-radius-bottomright: 20px;
+	-moz-border-radius-bottomleft: 20px;
+	border-bottom-right-radius: 20px;
+	border-bottom-left-radius: 20px;
+}
+
+#mainheader {
+    height: 165px;
+}
+
+#anagramform {
+    padding: 15px 35px;
+    text-align: justify;
+    width: 280px;
+    background-color: #ddd;
+    height: 115px;
+    float: right;
+    margin-bottom: 20px;
+    -webkit-border-bottom-right-radius: 20px;
+    -webkit-border-bottom-left-radius: 20px;
+    -moz-border-radius-bottomright: 20px;
+    -moz-border-radius-bottomleft: 20px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
 }
 
 .domainShouter {
@@ -28,15 +59,17 @@ body div {
 	height:330px;
 	padding:10px;
 	display:block;
+	margin: auto;
 	text-align:center;
 	background:url("/static/images/magicbox.png") 50% 50% no-repeat;
 }
 
 .domainPop{
 	margin-top:90px;
+	margin-left: 90px;
 	font-size:10px;
 	/*border: 1px solid #000;*/
-	width:500px;
+	width:600px;
 	height:170px;
 	text-align:center;
 	padding-top:50px;	
@@ -72,43 +105,109 @@ body div {
 	text-align:center;
 }
 
-.footer {
-	margin-top:80px;
-	background:url("/static/images/w3ninjas.png") 50% top no-repeat;
-/*	height:684px;*/
-	text-align:center;
-	padding-top:450px;
-	padding-bottom:40px;
+#randomnewsheadline {
+        background-color: #ddd;
+	padding: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
 }
 
-.about {
-	width:679px;
-	height:184px;
-	background: url("/static/images/woodenblock.png") 50% 50% no-repeat;
+#randomnewsheadline a {
+    text-decoration: none;
+    color: #444;
 }
+
+#randomnewsheadline a {
+    color: #333;
+}
+
+#newshead {
+    background-color: #ccc;
+    padding: 3px 10px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+#newsbody {
+    padding: 4px 10px;
+}
+
+#selectedwords {
+    font-size: 16px;
+    width: 600px;
+    float:left;
+    text-align: left;
+}
+
+#headsearch {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 20px 10px 10px;
+    color: #aaa;
+}
+
+#newssource {
+    font-size: 16px;
+    font-weight: bold;
+    width: 200px;
+    float: right;
+    text-align: right;
+}
+
+#newsfooter {
+    background-color: #ccc;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    height: 20px;
+    padding: 3px 10px;
+}
+
+.footer {
+	margin-top:80px;
+/*	background:url("/static/images/w3ninjas.png") 50% top no-repeat;*/
+/*	height:684px;*/
+	text-align:center;
+	background-color: #ccc;
+/*	padding-top:450px;*/
+	margin-bottom: 30px;
+	padding: 10px 0;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+}
+
 .about p {
-	padding:50px;
+	padding: 5px 30px;
 	display:block;
-	color:#4d1800;
+	color:#353535;
 	font-size:12px;
+	text-align: justify;
 }
 
 .about i {
 	display:inline-block;
-	background-color:#1b1e1c;
-	color:#71d7f3;
-	padding:3px 5px;
+	background-color:#aaa;
+	color:#444;
+	padding:2px 5px;
 	font-weight:bold;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
 }
-
 
 .about a {
 	display:inline-block;
-	background-color:#1b1e1c;
+	background-color:#aaa;
 	font-weight:bold;
-	padding:3px 5px;
-	color:#9ee22e;
+	padding:2px 5px;
+	color:#333;
 	text-decoration:none;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
 }
 
 

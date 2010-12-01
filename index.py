@@ -9,12 +9,13 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp import template
 
 import web2hunter as WH
+from preparefood import preparefood, customfood
 
 class MainHandler(webapp.RequestHandler):
 	tPath = os.path.join( os.path.dirname (__file__), "templates" )
 
 	def get(self):
-		todo = self.request.get('getname');
+		todo = self.request.get('getname')
 		
 		if (todo == 'true'):
 			if (self.request.headers.get('Referer') != None):
@@ -22,10 +23,12 @@ class MainHandler(webapp.RequestHandler):
 				#if (self.request.headers.get('Referer').find('web2hunter.appspot.com')!=-1):
 
 					# return a possible domain name
-					possiblename = WH.genName()
-			
+				        sessionkey = self.request.get('sessionkey')
+					
+					possiblename = WH.genName(sessionkey)
+
 					while (possiblename == ""):
-						possiblename = WH.genName()
+						possiblename = WH.genName(sessionkey)
 			
 					# lets sanitize the possible name
 					# for sometime we get the response header for some reason -
@@ -39,9 +42,39 @@ class MainHandler(webapp.RequestHandler):
 			else:
 				self.response.out.write ("nothing for you");
 		else:
+			custom = self.request.get('custom')
+			
+			if custom == 'search':				
+				name = self.request.get('name')
+				sessionkey = customfood(name)
+				words = name
+				newstitle = None
+				newslink = None
+				newsdesc = None
+			else:
+				# prepare food
+				try:
+					sessionkey, words, news = preparefood()
+					newstitle = news[0]
+					newslink = news[1]
+					newsdesc = news[2]
+					words = " ".join(words)
+				except Exception:
+					sessionkey = None
+					words = None
+					newstitle = None
+					newslink = None
+					newsdesc = None
+			template_values = {
+				'sessionkey': sessionkey,
+				'words': words,
+				'newstitle': newstitle,
+				'newslink': newslink,
+				'newsdesc': newsdesc,
+				}
 			# render the template
 			outstr = template.render (
-				self.tPath + '/index.html', None )
+				self.tPath + '/index.html', template_values )
 	
 			self.response.out.write (outstr)
 		

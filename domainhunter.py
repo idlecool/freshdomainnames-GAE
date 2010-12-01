@@ -23,7 +23,7 @@ def domainSearch(domain):
 	except:
 		print " connection error ... ",
 
-tlds = ['.net', '.com', '.org'];
+tlds = ['.com']  # ['.net', '.com', '.org'];
 # you can modify tlds to suit your needs,
 # complete list of Google Apps supported tlds -
 # tlds = ['.com', '.net', '.org', '.net', '.biz', '.info'];
