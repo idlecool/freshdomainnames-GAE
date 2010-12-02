@@ -44,6 +44,7 @@ def genName(sessionkey):
 		
 		if ( DH.domainSearch(awesomename + tld) ):
 			output = awesomename + tld
+			output = output.lower()
 		if output not in anagramchklist:
 			anagramchklist.append(output)
 			memcache.set(str(sessionkey)+"_chk", anagramchklist, 18000)
